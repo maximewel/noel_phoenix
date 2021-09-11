@@ -6,8 +6,8 @@ from django.contrib.auth.models import User
 class Gift(models.Model):
     """ The gift is a relationship between two users with a status (sent, received)"""
     #Can't delete a user involved in a gift: the gift must be deleted first.
-    sender = models.OneToOneField(User, on_delete=models.RESTRICT)
-    recipient = models.OneToOneField(User, on_delete=models.RESTRICT)
+    sender = models.OneToOneField(User, on_delete=models.RESTRICT, related_name="giftOut")
+    recipient = models.OneToOneField(User, on_delete=models.RESTRICT, related_name="giftIn")
     sent = models.BooleanField()
     received = models.BooleanField()
 
