@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'phoenixapp',
+    'django_extensions',
 ]
 
 MIDDLEWARE = [

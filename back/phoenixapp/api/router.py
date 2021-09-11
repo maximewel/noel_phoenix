@@ -1,4 +1,4 @@
-from viewsets import UserViewset
+from .viewsets import UserViewset
 from rest_framework import routers 
   
 router = routers.SimpleRouter() 

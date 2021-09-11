@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from phoenixapp.api.router import router as phoenixRouter
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #PHOENIX API PATHS
-    path('api/', include('phoenixapp.router.url')), 
+    path('api/', include(phoenixRouter.urls)), 
 ]
