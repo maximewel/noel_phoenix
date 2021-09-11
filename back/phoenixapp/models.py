@@ -5,8 +5,9 @@ from django.contrib.auth.models import User
 
 class Gift(models.Model):
     """ The gift is a relationship between two users with a status (sent, received)"""
-    sender = models.ForeignKey(User)
-    recipient = models.ForeignKey(User)
+    #Can't delete a user involved in a gift: the gift must be deleted first.
+    sender = models.OneToOneField(User, on_delete=models.RESTRICT)
+    recipient = models.OneToOneField(User, on_delete=models.RESTRICT)
     sent = models.BooleanField()
     received = models.BooleanField()
 
@@ -15,7 +16,7 @@ class Gift(models.Model):
 
 class Address(models.Model):
     """ Holds the physical adress of a user"""
-    user = models.ForeignKey(User)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     street = models.CharField(max_length=100)
     postalCode = models.CharField(max_length=20)
     city = models.CharField(max_length=50)
