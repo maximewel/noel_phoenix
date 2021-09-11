@@ -12,3 +12,14 @@ class Gift(models.Model):
 
     def __str__(self):
         return f"{self.sender} to {self.recipient}"
+
+class Address(models.Model):
+    """ Holds the physical adress of a user"""
+    user = models.ForeignKey(User)
+    street = models.CharField(max_length=100)
+    postalCode = models.CharField(max_length=20)
+    city = models.CharField(max_length=50)
+    country = models.CharField(max_length=50)
+
+    def __str__(self):
+        return f"{self.user.username} address"
