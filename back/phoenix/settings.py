@@ -82,9 +82,16 @@ WSGI_APPLICATION = 'phoenix.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if os.environ.get('DATABASE_URL'):
+if os.environ.get('SQL_NAME'):
     DATABASES = {
-        'default': dj_database_url.config(default=os.environ.get('DATABASE_URL'))
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ.get('SQL_NAME'),
+            'USER': os.environ.get('SQL_USER'),
+            'PASSWORD': os.environ.get('SQL_PASSWORD'),
+            'HOST': os.environ.get('SQL_HOST'),
+            'PORT': '3306',
+        }
     }
 else:
     DATABASES = {
