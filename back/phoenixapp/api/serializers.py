@@ -7,7 +7,7 @@ class UserSerializer(serializers.ModelSerializer):
         model = User
         fields = ['username', 'email', 'password']
 
-class AdressSerializer(serializers.ModelSerializer):
+class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
         fields = ('__all__')
