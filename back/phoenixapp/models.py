@@ -16,7 +16,12 @@ class Gift(models.Model):
 
 class Address(models.Model):
     """ Holds the physical adress of a user"""
+    #user
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+
+    #Informations
+    firstName = models.CharField(max_length=200)
+    lastName = models.CharField(max_length=200)
     street = models.CharField(max_length=100)
     postalCode = models.CharField(max_length=20)
     city = models.CharField(max_length=50)
