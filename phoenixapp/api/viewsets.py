@@ -28,7 +28,7 @@ class UserViewset(viewsets.ModelViewSet):
     queryset = User.objects.all()
     serializer_class = UserSerializer
 
-    permission_classes = [IsAuthenticated]
+    permission_classes = [AllowAny]
     permission_classes_by_action = {
         'create': [AllowAny],  # allow anyone to register
     }
