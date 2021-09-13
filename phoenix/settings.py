@@ -91,13 +91,13 @@ if os.environ.get('SQL_NAME'):
             'PORT': '3306',
         }
     }
-else:
+"""else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
-    }
+    }"""
 
 
 # Password validation
