@@ -80,24 +80,30 @@ WSGI_APPLICATION = 'phoenix.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-if os.environ.get('SQL_NAME'):
+try:
+    dbcreden = []
+    configFilename = os.path.join(os.path.dirname(__file__), 'config')
+    with open(configFilename, 'rt') as credentials:
+        for lines in credentials.read().split('\n'):
+            dbcreden.append(lines.strip())
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': os.environ.get('SQL_NAME'),
-            'USER': os.environ.get('SQL_USER'),
-            'PASSWORD': os.environ.get('SQL_PASSWORD'),
-            'HOST': os.environ.get('SQL_HOST'),
+            'NAME': dbcreden[0],
+            'USER': dbcreden[1],
+            'PASSWORD': dbcreden[2],
+            'HOST': dbcreden[3],
             'PORT': '3306',
         }
     }
-"""else:
+except Exception as e:
+    print(e)
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.sqlite3',
             'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
         }
-    }"""
+    }
 
 
 # Password validation
