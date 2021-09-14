@@ -1,0 +1,38 @@
+name: Continuous delivery
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    env:
+      django: /home/ubuntu/noel_phoenix
+
+    steps:
+      - name: Stop web services
+        run: |
+          sudo service emperor.uwsgi stop
+          sudo service nginx stop
+          
+      - uses: actions/checkout@v2
+
+      - name: Copy backend
+        run: sudo rsync --recursive . ${{ env.django }}
+        
+      - name: run migrations & django tasks
+        run: |
+          . ./.venv/bin/activate
+          python manage.py makemigrations
+          python manage.py migrate
+          python manage.py collectstatic --noinput
+        working-directory: ${{ env.django }}
+          
+      - name: Start web services
+        run: |
+          sudo service emperor.uwsgi start
+          sudo service nginx start
+
+
