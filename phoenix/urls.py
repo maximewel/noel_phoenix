@@ -15,10 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from django.conf.urls import url
 from phoenixapp.api.router import router as phoenixRouter
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     #PHOENIX API PATHS
     path('api/', include(phoenixRouter.urls)), 
+    #Django oauth2
+    url(r'^auth/', include('rest_framework_social_oauth2.urls')),
 ]
