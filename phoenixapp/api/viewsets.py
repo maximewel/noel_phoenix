@@ -35,6 +35,7 @@ class UserViewset(viewsets.ModelViewSet):
     }
 
 class GiftViewset(viewsets.ViewSet):
+    """Test viewset"""
     permission_classes = [IsAuthenticated]
 
     def list(self, request):
