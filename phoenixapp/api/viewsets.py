@@ -1,3 +1,4 @@
+import re
 from .serializers import *
 from rest_framework import filters, permissions, status, viewsets
 from rest_framework.decorators import action
@@ -32,3 +33,13 @@ class UserViewset(viewsets.ModelViewSet):
     permission_classes_by_action = {
         'create': [AllowAny],  # allow anyone to register
     }
+
+class GiftViewset(viewsets.ViewSet):
+    permission_classes = [IsAuthenticated]
+
+    def list(self, request):
+        queryset = Gift.objects.all()
+        serializer = UserSerializer(queryset, many=True)
+        return Response(serializer.data + {
+            "user": request.user
+        })
