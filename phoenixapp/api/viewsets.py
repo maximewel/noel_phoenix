@@ -41,6 +41,7 @@ class GiftViewset(viewsets.ViewSet):
     def list(self, request):
         queryset = Gift.objects.all()
         serializer = UserSerializer(queryset, many=True)
-        return Response(serializer.data + {
+        return Response({
+            "data": serializer.data,
             "user": request.user
         })
